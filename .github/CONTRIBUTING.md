@@ -92,6 +92,12 @@ yarn tokens build
 yarn tailwind-preset build
 ```
 
+Build the Orbit components once to generate icons and type declarations
+
+```sh
+yarn components build
+```
+
 For developing Orbit components, run Storybook:
 
 ```sh
