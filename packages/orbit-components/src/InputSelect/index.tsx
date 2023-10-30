@@ -39,6 +39,10 @@ const StyledModalHeader = styled(ModalHeader)`
   `};
 `;
 
+const defaultOptionFilter = ({ title }: Option, value: string) => {
+  return title.toLowerCase().includes(value.toLowerCase());
+};
+
 const InputSelect = React.forwardRef<HTMLInputElement, Props>(
   (
     {
@@ -65,6 +69,7 @@ const InputSelect = React.forwardRef<HTMLInputElement, Props>(
       maxWidth,
       onKeyDown,
       spaceAfter,
+      optionsFilter = defaultOptionFilter,
       ...props
     },
     ref,
@@ -142,9 +147,7 @@ const InputSelect = React.forwardRef<HTMLInputElement, Props>(
       if (value.length === 0) {
         setResults(groupedOptions);
       } else {
-        const filtered = options.filter(({ title }) => {
-          return title.toLowerCase().includes(value.toLowerCase());
-        });
+        const filtered = options.filter(option => optionsFilter(option, value));
         setResults({
           groups: [],
           all: filtered,

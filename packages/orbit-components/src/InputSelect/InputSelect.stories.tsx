@@ -137,6 +137,56 @@ PreviouslySelected.story = {
   },
 };
 
+export const CustomFiltering = () => {
+  const cityOptions = [
+    { title: "Paris", value: "paris", group: "France" },
+    { title: "Marseille", value: "marseille", group: "France" },
+    { title: "London", value: "london", group: "United Kingdom" },
+    { title: "Manchester", value: "manchester", group: "United Kingdom" },
+    { title: "Madrid", value: "madrid", group: "Spain" },
+    { title: "Barcelona", value: "barcelona", group: "Spain" },
+    { title: "Berlin", value: "berlin", group: "Germany" },
+    { title: "Munich", value: "munich", group: "Germany" },
+    { title: "Rome", value: "rome", group: "Italy" },
+    { title: "Venice", value: "venice", group: "Italy" },
+    { title: "Amsterdam", value: "amsterdam", group: "Netherlands" },
+    { title: "Rotterdam", value: "rotterdam", group: "Netherlands" },
+    { title: "Vienna", value: "vienna", group: "Austria" },
+    { title: "Salzburg", value: "salzburg", group: "Austria" },
+    { title: "Innsbruck", value: "innsbruck", group: "Austria" },
+    { title: "Prague", value: "prague", group: "Czech Republic" },
+  ];
+
+  return (
+    <div
+      css={css`
+        min-height: 1000px;
+      `}
+    >
+      <InputSelect
+        placeholder="Select a city"
+        options={cityOptions}
+        onClose={action("onClose")}
+        onChange={action("onChange")}
+        onOptionSelect={action("onOptionSelect")}
+        showAll={false}
+        optionsFilter={(option, inputValue) =>
+          option.title.toLowerCase().includes(inputValue.toLowerCase()) ||
+          (option.group !== undefined &&
+            option.group.toLowerCase().includes(inputValue.toLowerCase()))
+        }
+      />
+    </div>
+  );
+};
+
+CustomFiltering.story = {
+  name: "Custom Option filtering",
+  parameters: {
+    info: "If optionsFilter is defined, the options list is filtered by the provided function. For the example below, you can search for against the value found in the title or the group.",
+  },
+};
+
 export const Playground = () => {
   const pokemonOptions = [
     {
